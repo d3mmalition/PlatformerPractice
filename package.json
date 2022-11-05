@@ -1,0 +1,13 @@
+{
+  "name": "c",
+  "version": "1.0.0",
+  "description": "mario game",
+  "main": "game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "live-server",
+    "start:solution": "npm run -it docker:build && npm run docker:run"
+  },
+  "author": "",
+  "license": "ISC"
+}
