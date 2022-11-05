@@ -42,12 +42,12 @@ scene("game", () => {
 const levelCfg = {
     width: 20,
     height: 20,
-    '=': [sprite("brick", solid())],
+    '=': [sprite("brick", solid(), area())],
     '$': [sprite("coin", solid())],
-    '(': [sprite("bottom-left", solid(), scale(0.5))],
-    ')': [sprite("bottom-right", solid(), scale(0.5))],
-    '-': [sprite("top-right", solid(), scale(0.5))],
-    '+': [sprite("top-left", solid(), scale(0.5))],
+    '(': [sprite("bottom-left", solid(), scale(1))],
+    ')': [sprite("bottom-right", solid(), scale(1))],
+    '-': [sprite("top-right", solid(), scale(1))],
+    '+': [sprite("top-left", solid(), scale(1))],
     '%': [sprite("evil-shroom", solid())],
     '?': [sprite("mystery-block", solid())],
     '^': [sprite("evil-shroom", solid())],
@@ -67,18 +67,13 @@ const scoreLabel = add([
 add([text("level " + "score", pos(4, 6))])
 
 const player = add([
-    sprite("mario"), solid(), 
+    sprite("mario"), solid(),area(), 
     pos(30, 0),
-    body(),
-    origin("bot")
+    body({
+        JUMP_FORCE: 640,
+    }),
+    origin("bot"),
 ])
-player.collides('brick', ()=>{
-    player.move(0,-2000)
-})
-
-action("tile", (t) => {
-    t.solid = player.pos.dist(btpos) <= 32; // arbitrary distance based on you tile size
-});
 
 keyDown("left", () => {
     player.move(-MOVE_SPEED, 0);
